@@ -25,12 +25,13 @@ class _BottomNavBar extends State<BottomNavBar> {
     });
   }
 
+//BOTTOM NAVIGATION
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: _pages[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Color.fromARGB(255, 211, 210, 210),
+        backgroundColor: Color.fromARGB(255, 250, 125, 116),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.person),
@@ -42,7 +43,7 @@ class _BottomNavBar extends State<BottomNavBar> {
           ),
         ],
         currentIndex: _selectedIndex,
-        selectedItemColor: Colors.blueAccent,
+        selectedItemColor: const Color.fromARGB(255, 255, 255, 255),
         onTap: _onItemTapped,
       ),
     );
@@ -56,11 +57,13 @@ class loginPage extends StatefulWidget {
   State<loginPage> createState() => _loginPageState();
 }
 
+//LOGIN PAGE
 class _loginPageState extends State<loginPage> {
   bool visibilityPass = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color.fromARGB(255, 255, 219, 219),
       body: Center(
         child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -71,21 +74,24 @@ class _loginPageState extends State<loginPage> {
                   child: Container(
                       padding: EdgeInsets.fromLTRB(20, 0, 20, 30),
                       child: Image.asset(
-                        'assets/logo.png',
+                        'assets/images/logo.png',
                         width: 250,
                         height: 120,
                       ))),
               Text(
-                "Indosiar",
+                "INDOSIAR",
                 style: TextStyle(
                   fontSize: 30,
+                  fontFamily: 'RedHatDisplay',
+                  color: Color.fromARGB(255, 250, 125, 116),
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               SizedBox(height: 20),
               Container(
                 width: 300,
                 height: 325,
-                color: Colors.white,
+                color: const Color.fromARGB(255, 255, 219, 219),
                 child: Card(
                   elevation: 10,
                   shadowColor: Colors.black,
@@ -143,6 +149,7 @@ class _loginPageState extends State<loginPage> {
                       ),
                       SizedBox(height: 10),
                       ElevatedButton(
+                        style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 250, 125, 116))),
                         onPressed: () {
                           Navigator.push(
                               context,
@@ -200,16 +207,20 @@ class _homePageState extends State<homePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor:const Color.fromARGB(255, 250, 125, 116),
           title: Row(
         children: [
           Image.asset(
-            'assets/logo.png',
+            'assets/images/logo.png',
             height: 45,
           ),
           SizedBox(width: 10),
-          Text("App Rajwa"),
+          Text("INDOSIAR",
+          style: TextStyle(fontFamily: 'RedHatDisplay'),
+          ),
         ],
       )),
+      //dropdown
       body: Column(
         children: [
           Padding(
@@ -235,14 +246,54 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
+          //listview
+          Align(
+            alignment: Alignment.center,
+            child: Card(
+              child: Container(
+                height: 100,
+                width: double.infinity,
+                child: Container(
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 4,
+                    itemBuilder: ((context, index) {
+                      return Container(
+                        width: 100,
+                        height: 100,
+                        margin: EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(5),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.5),
+                              spreadRadius: 3,
+                              blurRadius: 5,
+                              offset: Offset(0, 3),
+                            )
+                          ]
+                        ),
+                        child: Center(
+                          child: Text("Box ${index + 1}"),
+                        ),
+                      );
+                    }),
+                    ),
+                ),
+              ),
+            ),
+          ),
+          //dialog
           SizedBox(height: 20),
           Column(
             children: [
               Padding(
-                padding: EdgeInsets.only(top: 100),
+                padding: EdgeInsets.only(top: 70),
                 child: Align(
                   alignment: Alignment.center,
                   child: ElevatedButton(
+                    style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 250, 125, 116))),
                     onPressed: () {
                       showDialog(
                         context: context,
@@ -277,8 +328,10 @@ class _homePageState extends State<homePage> {
               ),
             ],
           ),
+          //snackbar
           SizedBox(height: 20),
           ElevatedButton(
+            style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 250, 125, 116))),
             onPressed: () {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
@@ -303,8 +356,10 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
+          //bottom sheet
           SizedBox(height: 20),
           ElevatedButton(
+            style: ButtonStyle(backgroundColor: MaterialStatePropertyAll(Color.fromARGB(255, 250, 125, 116))),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
@@ -356,7 +411,54 @@ class _homePageState extends State<homePage> {
               ),
             ),
           ),
-        ],
+        ],  
+      ),
+      endDrawer: Drawer(
+        child: ListView(
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage('assets/images/header3.jpg'), fit: BoxFit.cover)
+              ),
+            child: Stack(
+              children: <Widget>[
+                Align(
+                  alignment: Alignment.center,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/avatar.png'),
+                        radius: 60.0,
+                        backgroundColor: Colors.red,
+                      ),
+                 ), 
+              ],
+            ),
+          ),
+          ListTile(
+            title: Text('Profile'),
+            leading: Icon(Icons.person),
+            trailing: IconButton(
+              onPressed: (){},
+               icon: Icon(Icons.arrow_right)
+            ),
+          ),
+          ListTile(
+            title: Text('Settings'),
+            leading: Icon(Icons.settings),
+            trailing: IconButton(
+              onPressed: (){},
+               icon: Icon(Icons.arrow_right)
+            ),
+          ),
+          ListTile(
+            title: Text('Log Out'),
+            leading: Icon(Icons.logout),
+            trailing: IconButton(
+              onPressed: (){},
+               icon: Icon(Icons.arrow_right)
+            ),
+          ),
+         ],
+        ),
       ),
     );
   }
